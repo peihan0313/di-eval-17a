@@ -16,17 +16,19 @@ function getKEY(req, res) {
     if (VALUE[req.params.base64]) {
       let now = moment.utc().format()
       var value = VALUE[req.params.base64]
-      res.json({
+      res.json(200,{
         "VALUE": value,
         TS: now,
       })
     } else {
-      res.json(404)
+      res.json(404,{
+        message:'Not Found'
+      })
     }
 
   } else {
     res.json(400, {
-      "message": "給人看的錯誤說明"
+      "message": "req err"
     })
   }
 }
@@ -43,13 +45,13 @@ function deleteKEY(req, res) {
       })
       delete VALUE[req.params.base64]
     } else {
-      res.json({
+      res.json(200,{
         TS: now,
       })
     }
   } else {
     res.json(400, {
-      "message": "給人看的錯誤說明"
+      "message": "req err"
     })
   }
 }
@@ -60,12 +62,12 @@ function postKEY(req, res) {
     //console.log(obj)
     let now = moment.utc().format()
     //console.log(now)
-    res.json({
+    res.json(200,{
       TS: now
     })
   } else {
     res.json(400, {
-      "message": "給人看的錯誤說明"
+      "message": "req err"
     })
   }
 }

@@ -1,23 +1,24 @@
 var request = require('request');
-module.exports = function (req, res) {
+
+function encrypt(req, res) {
     if (req.headers['content-type'] !== 'application/json') {
         res.json(400, {
-            'err': 'err'
+            message: 'Bad Request'
         })
     }
     if (!req.body['plaintext']) {
         res.json(400, {
-            'errr': 'errr'
+            message: 'Bad Request'
         })
     }
     if (req.body['plaintext'].match(/[^0-9,a-f]/)) {
         res.json(400, {
-            'errr': 'errr'
+            message: 'Bad Request'
         })
     }
     if (req.body['plaintext'] > 16) {
         res.json(413, {
-            "message": "給人看的錯誤說明"
+            message: "Entity Too Large"
         })
     }
 
@@ -33,9 +34,12 @@ module.exports = function (req, res) {
         if (!error && response.statusCode == 200) {
             console.log(body) // Print the shortened url.
         }
-        res.json(
+        res.json(200,
             body
         )
     });
+}
+module.exports = {
+    encrypt
 }
 

@@ -33,7 +33,7 @@ SwaggerRestify.create(config, function (err, swaggerRestify) {
 app.post('/kv/:base64', kv.postKEY)
 app.get('/kv/:base64', kv.getKEY)
 app.del('/kv/:base64', kv.deleteKEY)
-app.post('/encrypt', encrypt)
+app.post('/encrypt', encrypt.encrypt)
 
 /*app.post('/kv/:base64', function (req, res) {
   if (URLSafeBase64.validate(req.params.base64)) {

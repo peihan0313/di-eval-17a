@@ -72,6 +72,30 @@ paths:
           description: Bad Request, usually malformed parameters
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /encrypt:
+    post:
+      description: return encode
+      operationId: encrypt
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema: 
+            $ref: "#/definitions/EnPostRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/EnPostResponse"
+        "400":
+          description: Bad Request, usually malformed parameters
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "413":
+          description: req.length to long
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -111,3 +135,16 @@ definitions:
     properties:
       message:
         type: string
+  EnPostRequest:
+    required: 
+      - plaintext
+    properties:
+      plaintext:
+        type: string
+  EnPostResponse:
+    required:
+      - ciphertext
+    properties:
+      ciphertext:
+        type: string
+
